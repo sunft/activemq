@@ -29,8 +29,8 @@ public class Sender {
         connection.start();
 
         //第三步：通过Connection对象创建Session会话(上下文环境)，用于接收消息，参数配置1为是否启用事务，
-        //参数配置2为签收模式，一般我们设置为自动签收
-        Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
+        //参数配置2为签收模式，一般我们设置为自动签收,这里设置为客户端签收
+        Session session = connection.createSession(Boolean.FALSE, /*Session.AUTO_ACKNOWLEDGE*/Session.CLIENT_ACKNOWLEDGE);
 
         //第四步：通过Session创建Destination对象，指的是一个客户端用来指定生产消息目标和消费消息来源的对象，
         //在PTP模式中，Destination被称作Queue即队列：在Pub/Sub模式，Destination被称作Topic即主题。在程序中可以使用多个Queue和Topic。
@@ -44,7 +44,7 @@ public class Sender {
         //producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
         //第七步：最后我们使用JMS规范的TextMessage形式创建数据(通过Session对象)，并用MessageProducer的send方法发送数据。
-        for(int i = 0; i < 100; i ++) {
+        for(int i = 0; i < 10; i ++) {
             TextMessage msg = session.createTextMessage("我是消息内容" + i);
             //覆盖之前的信息
             //msg.setText("sunft");
@@ -55,8 +55,11 @@ public class Sender {
             //第五个参数：消息的过期时间
             producer.send(destination, msg);
             //System.out.println(msg.getText());
-            TimeUnit.SECONDS.sleep(1);
+            //TimeUnit.SECONDS.sleep(1);
         }
+
+        //设置支持事物后需要提交事务
+        //session.commit();
 
         //发送Map结构的消息
 //        for(int i = 0; i < 5; i ++) {
