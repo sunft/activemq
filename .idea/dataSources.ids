@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - activemq@localhost" uuid="7ee3e00f-b219-4d69-bfba-cf51a5acaa36">
+    <database-info product="MySQL" version="8.0.11" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="activemq"/>
+    <table name="activemq_acks" schema="" catalog="activemq" type="TABLE">
+      <column name="CONTAINER" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SUB_DEST" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CLIENT_ID" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SUB_NAME" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SELECTOR" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LAST_ACKED_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="PRIORITY" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="NQ=="/>
+      <column name="XID" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="CONTAINER,CLIENT_ID,SUB_NAME,PRIORITY"/>
+      <index name="ACTIVEMQ_ACKS_XIDX" unique="false" columns="XID"/>
+    </table>
+    <table name="activemq_lock" schema="" catalog="activemq" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="TIME" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="BROKER_NAME" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="activemq_msgs" schema="" catalog="activemq" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="CONTAINER" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="MSGID_PROD" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MSGID_SEQ" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="EXPIRATION" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="MSG" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="PRIORITY" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="XID" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <index name="ACTIVEMQ_MSGS_CIDX" unique="false" columns="CONTAINER"/>
+      <index name="ACTIVEMQ_MSGS_EIDX" unique="false" columns="EXPIRATION"/>
+      <index name="ACTIVEMQ_MSGS_MIDX" unique="false" columns="MSGID_PROD,MSGID_SEQ"/>
+      <index name="ACTIVEMQ_MSGS_PIDX" unique="false" columns="PRIORITY"/>
+      <index name="ACTIVEMQ_MSGS_XIDX" unique="false" columns="XID"/>
+    </table>
+  </data-source>
+</component>

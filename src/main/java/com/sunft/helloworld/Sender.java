@@ -41,7 +41,7 @@ public class Sender {
         MessageProducer producer = session.createProducer(null);
 
         //第六步：我们可以使用MessageProducer的setDellveryMode方法为其设置持久化特性和非持久化特性(DeliveryMode)
-        //producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+        producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 
         //第七步：最后我们使用JMS规范的TextMessage形式创建数据(通过Session对象)，并用MessageProducer的send方法发送数据。
         for(int i = 0; i < 10; i ++) {
